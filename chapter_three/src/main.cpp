@@ -2,14 +2,11 @@
 
 int main()
 {
-  cout << "Please enter a  value: ";
-  int n;
-  cin >> n;
-  cout << "\nn + 1 == " << n+1 <<"\n"
-       << "\nthree times n == " << 3 * n
-       << "\ntwice n == " << n + n
-       << "\nn squared == " << n * n
-       << "\nhalf of n == " << n / 2
-       << "\nsquare root of n == " << sqrt(n)
-       << "\n";
+  string previous = " ";
+  string current;
+  while(cin >>current) {
+    if(previous == current) 
+      cout << "repeated word: " << current << "\n";
+      previous = current;
+  }
 }
