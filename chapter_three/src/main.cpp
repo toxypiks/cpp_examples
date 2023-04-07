@@ -2,8 +2,8 @@
 
 int main()
 {
-  cout << "Please enter a floating-point value: ";
-  double n;
+  cout << "Please enter a  value: ";
+  int n;
   cin >> n;
   cout << "\nn + 1 == " << n+1 <<"\n"
        << "\nthree times n == " << 3 * n
