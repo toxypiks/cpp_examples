@@ -11,5 +11,20 @@ int main()
   //you can copy the resutling int back into a char and get the original value
   char c2 = i1;
   cout << "value of c2: " <<  c2 << "\n";
+
+  //unsave conventions e.g. initialization of char with an int
+
+  double d = 0;
+  while(cin>>d){
+
+    int i = d;
+    char c = i;
+    int i2 = c;
+
+    cout << "d == " << d
+         << " i == " << i
+         << " i2 == " << i2
+         << " char(" << c << ")\n";
+  }
 }
  
