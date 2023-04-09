@@ -6,12 +6,18 @@ int main() {
   char unit = ' ';
   cin >> amount >> unit;
 
-  if(unit == 'y')
-    cout << amount << " dollars are " << amount * 132.14 << " yen\n";
-  else if (unit == 'k')
-    cout << amount << " dollars are " << amount * 10.50 << " kroner\n";
-  else if (unit == 'p')
-    cout << amount << " dollars are " << amount * 0.81 << " pounds\n";
-  else
-    cout << "Sorry, I don't know a unit called '" << unit << "'\n";
+  switch(unit) {
+    case 'y':
+      cout << amount << " dollars are " << amount * 132.14 << " yen\n";
+      break;
+    case 'k':
+      cout << amount << " dollars are " << amount * 10.50 << " kroner\n";
+      break;
+    case 'p':
+      cout << amount << " dollars are " << amount * 0.81 << " pounds\n";
+      break;
+    default:
+      cout << "Sorry, I don't know a unit called '" << unit << "'\n";
+      break;
+  }
 }
