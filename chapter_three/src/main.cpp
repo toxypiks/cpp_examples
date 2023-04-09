@@ -2,29 +2,39 @@
 
 int main()
 {
-  //save way to get the value of a character with no information loss
-  char c = 'x';
-  int i1 = c;
-  int i2 = 'x';
-  cout << "value c: " << c << " value i1: " << i1 << " value i2: " <<  i2 << "\n";
+  //Drill of the third chapter
 
-  //you can copy the resutling int back into a char and get the original value
-  char c2 = i1;
-  cout << "value of c2: " <<  c2 << "\n";
+  cout << "Enter the name of the person you want to write to: \n";
+  string addresser_name;
+  cin >> addresser_name;
+  cout << "Dear " << addresser_name << ",\n"
+       <<"How are you? I'm fine. I miss you. \n";
 
-  //unsave conventions e.g. initialization of char with an int
+  cout << "Enter the name of another person your addresser is connected with: \n";
+  string friend_of_addresser;
+  cin >> friend_of_addresser;
 
-  double d = 0;
-  while(cin>>d){
+  cout << "Have you seen " << friend_of_addresser << " lately?\n";
+  string friend_sex = "0";
+  cout << "Type in 'm' if your friend is male and 'f' if your friend is female: \n";
+  cin >> friend_sex;
 
-    int i = d;
-    char c = i;
-    int i2 = c;
+  if(friend_sex == "m")
+    cout << "If you see " << friend_of_addresser << " please ask him to call me.\n";
+  if(friend_sex == "f")
+    cout << "if you see " << friend_of_addresser << " please ask her to call me.\n";
 
-    cout << "d == " << d
-         << " i == " << i
-         << " i2 == " << i2
-         << " char(" << c << ")\n";
-  }
+  cout << "Please enter the age of your addresser: \n";
+  int age = 0;
+  cin >> age;
+  if(age == 0 || age > 120)
+    simple_error("You're kidding!");
+  cout << "I hear you just had a birthday and you are " << age << " years old.\n";
+  if(age < 12)
+    cout << "Next year you will be " << age+1 << "!\n";
+  if(age == 17)
+    cout << "Next year you will be able to vote!\n";
+  if(age > 70)
+    cout << "I hope you are enjoying retirement.\n";
 }
  
