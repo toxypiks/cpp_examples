@@ -4,21 +4,15 @@ int main() {
   //drill forth chapter
   int x = 0;
   double one = 0;
-  double two = 0;
-  vector<double> input_numbers;
+  double min_num = 100000;
+  double max_num = 0;
   while(x < 100) {
-    cin >> one >> two;
-    input_numbers.push_back(one);
-    input_numbers.push_back(two);
-    sort(input_numbers);
-    if(input_numbers[0] != input_numbers[1] && (input_numbers[1] - input_numbers[0]) < 1.0/100)
-      cout << "The smaller value is: " << input_numbers[0] << " The bigger value is: " << input_numbers[1]
-           << "\n" << "The numbers are almost equal\n";
-    else if(input_numbers[0] != input_numbers[1]&& (input_numbers[1] - input_numbers[0]) > 1.0/100)
-      cout << "The smaller value is: " << input_numbers[0] << " The bigger value is: " << input_numbers[1];
-    else if(input_numbers[0] == input_numbers[1])
-      cout << "The numbers are equal\n";
-    input_numbers = {};
+    cin >> one;
+    if(one < min_num){
+      cout << "the smallest value so far: " << one << "\n";
+      min_num = one;}
+    else if(one > max_num && one > min_num){
+      cout << "the largest value so far: " << one << "\n";
+      max_num = one;}
     x++;
   }
-}
