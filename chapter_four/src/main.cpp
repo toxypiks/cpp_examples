@@ -1,9 +1,14 @@
 #include "std_lib_facilities.h"
 
-int main() {
-  char j = 'A';
-  int char_val = j;
-  for (int i = 0; i<58; i++) {
-    cout << char(j+i) << "\t" << j+i  << "\n";
+void my_square(double x) {
+  double square_value = 0;
+  for(int i = 0; i < x; ++i){
+    square_value += x;
   }
+  cout << square_value << "\n";
+}
+
+int main() {
+  double my_value = 4;
+  my_square(my_value);
 }
