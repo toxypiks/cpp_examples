@@ -12,33 +12,40 @@ double formatted_push_back(double one, string unit){
 }
 
 int main() {
-  //drill forth chapter
+  //drill fourth chapter
   int x {0};
   double one {0.0};
+  double double_one_in_meter {0.0};
   double min_num {10000.0};
   double max_num {0.0};
   string unit = {" "};
   vector<double> values_in_meter;
   cout << "Please type in a number followed by a unit (cm, in, ft or m) \n";
-  while(x < 3) {
+  while(x < 7) {
     cin >> one >> unit;
-    if(unit == " " && unit != "cm" && unit != "in" && unit != "ft" && unit != "m")
+    if(unit == " " || unit != "cm" && unit != "in" && unit != "ft" && unit != "m")
       cout << "Sorry, I dont know the unit " << unit << "\n";
     else {
-      if(one < min_num){
-        cout << "the smallest value so far: " << one << "\n";
-        min_num = one;
-        values_in_meter.push_back(formatted_push_back(one,unit));
+      double_one_in_meter = formatted_push_back(one, unit);
+      if (x == 0) {
+        min_num = double_one_in_meter;
+        max_num = double_one_in_meter;
+        cout << "the smallest value so far: " << double_one_in_meter << "\n";
+        cout << "the largest value so far: " << double_one_in_meter << "\n";
       }
-      else if(one > max_num && one > min_num){
-        cout << "the largest value so far: " << one << "\n";
-        max_num = one;
-        values_in_meter.push_back(formatted_push_back(one,unit));
+      if(double_one_in_meter < min_num){
+        cout << "the smallest value so far: " << double_one_in_meter << "\n";
+        min_num = double_one_in_meter;
       }
+      else if(double_one_in_meter > max_num){
+        cout << "the largest value so far: " << double_one_in_meter << "\n";
+        max_num = double_one_in_meter;
+      }
+      values_in_meter.push_back(double_one_in_meter);
     } 
     x++;
   }
-  cout << min_num << " " << max_num << " " << values_in_meter.size() << "\n";
+  cout << "min:" << min_num << " max: " << max_num << " size of vec: " << values_in_meter.size() << "\n";
   sort(values_in_meter);
   for(double value: values_in_meter) cout << value << "\n";
 }
