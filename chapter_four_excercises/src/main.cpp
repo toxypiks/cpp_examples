@@ -1,24 +1,46 @@
 #include "std_lib_facilities.h"
 
-int main() {
+int my_binary_search(vector<int> numbers) {
 
-  vector<double> distances;
-  for(double distance; cin>>distance;)
-    distances.push_back(distance);
-  
-  double sum_dist = 0;
-  double mean = 0;
-  double min_dist = 0;
-  double max_dist = 0;
+  int low_pointer {numbers[0]};
+  int high_pointer {numbers[numbers.size()-1]};
+  int middle_element {(low_pointer + (high_pointer - low_pointer))/2};
+  char answer {' '};
 
-  sort(distances);
-  min_dist = distances[0];
-  max_dist = distances[distances.size()-1];
-
-  for(double value: distances)
-    sum_dist += value;
-
-  mean = sum_dist / distances.size();
-
-  cout << "sum: " << sum_dist << " min: " << min_dist << " max: " << max_dist << " mean: " << mean << "\n";
+  while(low_pointer <= high_pointer){
+    cout << "Is the number: " << middle_element << " ?(y/n)\n";               
+    cin >> answer;                                                            
+    if(answer == 'y'){                                                         
+      return middle_element;
+    }
+    else {                                                                    
+      cout << "Is the number higher then: " << middle_element << " ?(y/n)\n"; 
+      cin >> answer;
+    }                                                                         
+    if (answer == 'y'){                                                       
+      low_pointer = middle_element+1;
+      middle_element = ((high_pointer - low_pointer)/2) + low_pointer;
+    }
+    else {
+      high_pointer = middle_element-1;
+      middle_element = high_pointer/2; //gucken ob gerade oder ungerade
+    }
+    if(low_pointer == high_pointer)
+      return  low_pointer;
+  }
+  return -1;
 }
+
+
+int main() {
+  int number {0};
+  cout<<"Guess a number between 1 and 20: \n";
+ 
+  vector<int> numbers(20);
+  for (int i = 0; i < numbers.size(); i++) {
+    numbers[i] = i+1;
+  }
+  int result = my_binary_search(numbers);
+  cout<<result;
+  return -1;
+} 
