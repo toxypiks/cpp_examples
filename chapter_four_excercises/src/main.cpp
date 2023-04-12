@@ -2,17 +2,23 @@
 
 int main() {
 
-  vector<double> temps;
-  for(double temp; cin>>temp;)
-    temps.push_back(temp);
+  vector<double> distances;
+  for(double distance; cin>>distance;)
+    distances.push_back(distance);
+  
+  double sum_dist = 0;
+  double mean = 0;
+  double min_dist = 0;
+  double max_dist = 0;
 
-  double median = 0;
-  sort(temps);
-  int middle = temps.size()/2;
-  if(temps.size() % 2 != 0)
-    median = temps[middle];
-  else
-    median = (temps[middle -1] + temps[middle]) / 2;
+  sort(distances);
+  min_dist = distances[0];
+  max_dist = distances[distances.size()-1];
 
-  cout << "Median value of all temps: " << median << "\n";
+  for(double value: distances)
+    sum_dist += value;
+
+  mean = sum_dist / distances.size();
+
+  cout << "sum: " << sum_dist << " min: " << min_dist << " max: " << max_dist << " mean: " << mean << "\n";
 }
