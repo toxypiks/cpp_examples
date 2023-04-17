@@ -1,24 +1,24 @@
 #include "std_lib_facilities.h"
 
-void words_to_digits(string word){
-  if (word == "zero")
-    cout << 0 << "\n";
-  else if (word == "one")
-    cout << 1 << "\n";
-  else if (word == "two")
-    cout << 2 << "\n";
-  else if (word == "three")
-    cout << 3 << "\n";
-  else if (word == "four")
-    cout << 4 << "\n";
-  else
-    cout << "Sorry, I dont know the word: " << word << "\n";
-    
+double calculation(string operation, double val1, double val2){
+  if(operation == "+" || operation == "plus")
+    return val1 + val2;
+  else if(operation == "-" || operation == "minus")
+    return val1 - val2;
+  else if(operation == "*" || operation == "mul")
+    return val1 * val2;
+  else if(operation == "/" || operation == "div")
+    return val1 / val2;
+  return -1;
 }
 
 int main(){
-  cout << "Write out a number between zero and four: \n";
-  string user_input {" "};
-  cin >> user_input;
-  words_to_digits(user_input);
+
+  cout << "Type in an operation (+/plus,-/minus,*/mul or //div) followed by two numbers: \n";
+  string operation {' '};
+  double value1 {0};
+  double value2 {0};
+  cin >> operation >> value1 >> value2;
+  double result = calculation(operation,value1,value2);
+  cout << result << "\n";
 }
