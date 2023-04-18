@@ -1,4 +1,5 @@
 #include "std_lib_facilities.h"
+#include <optional>
 
 string convert_digit_to_spelled_value(int digit) {
   vector<string> words {"zero","one","two","three","four","five","six","seven","eight","nine"};
@@ -9,7 +10,6 @@ string convert_digit_to_spelled_value(int digit) {
 }
 
 int convert_spelled_value_to_digit(string spelled_value) {
-
   vector<int> number;
   for (int i = 0; i < 10; i++){
     number.push_back(i);
@@ -38,69 +38,66 @@ int convert_spelled_value_to_digit(string spelled_value) {
   return -1;
 }
 
-void my_calculator(double first_num = -1, double second_num = -1,string spelled_first_num = " ", string spelled_second_num = " ",char operation = ' '){
-  int result_num {-1};
-  string result_spelled {" "};
-  if(first_num != -1 && second_num != -1 ){
-    if (operation == '+'){
-      result_num = first_num + second_num;
-      cout << convert_digit_to_spelled_value(first_num) << " " << operation << " " << convert_digit_to_spelled_value(second_num) << " " << result_num << "\n";
+std::optional<int> string_to_int(string input) {
+  if(input.size() == 1) {
+    int input_value = (input[0] - '0');
+    if ( input_value >= 0 && (input_value <= 9)) {
+      return {input_value};    
+    } else {
+      return std::nullopt;
     }
-    else if (operation == '/'){
-      result_num =  first_num / second_num;
-      cout << convert_digit_to_spelled_value(first_num) << " " << operation << " " << convert_digit_to_spelled_value(second_num) << " " << result_num << "\n";
-    }
-    else if (operation == '*'){
-      result_num = first_num * second_num;
-      cout << convert_digit_to_spelled_value(first_num) << " " << operation << " " << convert_digit_to_spelled_value(second_num) << " " << result_num << "\n";
-    }
-    else if (operation == '-'){
-      result_num = first_num - second_num;
-      cout << convert_digit_to_spelled_value(first_num) << " " << operation << " " << convert_digit_to_spelled_value(second_num) << " " << result_num << "\n";
+  } else {
+    int input_value = convert_spelled_value_to_digit(input);
+    if (input_value == -1) {
+      return std::nullopt;
+    } else {
+      return {input_value};  
     }
   }
-  else if(spelled_first_num != " " && spelled_second_num != " "){
+}
+
+void my_calculator(string first_num, string second_num, char operation){
+  int result_num {-1};
+  optional<int> first = string_to_int(first_num);
+  optional<int> second = string_to_int(second_num);
+      
+  if( (first == std::nullopt) || (second == std::nullopt) ){
+    cout << "error input value" << endl;
+    return;
+  } else {
     if (operation == '+'){
-      result_num = convert_spelled_value_to_digit(spelled_first_num) + convert_spelled_value_to_digit(spelled_second_num);
-      cout << spelled_first_num << " " << operation << " " << spelled_second_num << " " << result_num << "\n";
+      result_num = *first + *second;
+      cout << convert_digit_to_spelled_value(*first) << " " << operation << " " << convert_digit_to_spelled_value(*second) << " " << result_num << "\n";
     }
     else if (operation == '/'){
-      result_num =  convert_spelled_value_to_digit(spelled_first_num) / convert_spelled_value_to_digit(spelled_second_num);
-      cout << spelled_first_num << " " << operation << " " << spelled_second_num << " " << result_num << "\n";
+      if(second == 0) {
+        cout << "error - zero division";
+        return;
+      }
+      result_num =  *first / *second;
+      cout << convert_digit_to_spelled_value(*first) << " " << operation << " " << convert_digit_to_spelled_value(*second) << " " << result_num << "\n";
     }
     else if (operation == '*'){
-      result_num = convert_spelled_value_to_digit(spelled_first_num) * convert_spelled_value_to_digit(spelled_second_num);
-      cout << spelled_first_num << " " << operation << " " << spelled_second_num << " " << result_num << "\n";
+      result_num = *first * *second;
+      cout << convert_digit_to_spelled_value(*first) << " " << operation << " " << convert_digit_to_spelled_value(*second) << " " << result_num << "\n";
     }
     else if (operation == '-'){
-      result_num = convert_spelled_value_to_digit(spelled_first_num) - convert_spelled_value_to_digit(spelled_second_num);
-      cout << spelled_first_num << " " << operation << " " << spelled_second_num << " " << result_num << "\n";
+      result_num = *first - *second;
+      cout << convert_digit_to_spelled_value(*first) << " " << operation << " " << convert_digit_to_spelled_value(*second) << " " << result_num << "\n";
+    } else {
+      cout << "error operator"  << endl;
+      return;
     }
   }
 }
 
 int main(){
 
-  double first_num {0};
-  double second_num {0};
   char operation {' '};
-  string spelled_num_one {" "};
-  string spelled_num_two {" "};
+  string input_num_one {" "};
+  string input_num_two {" "};
 
   cout << "Please type in 2 numbers and the operation you wanna execute ('+','-','/','*')\n";
-  cin >> first_num >> second_num >> spelled_num_one >> spelled_num_two >> operation;
-  my_calculator(first_num, second_num, spelled_num_one, spelled_num_two, operation);
-  
-
-  //cout << "Type in a number between 0 and 9: \n";
-  //int number {0};
-  //cin >> number;
-  //string spelled_word = convert_digit_to_spelled_value(number);
-  //cout << spelled_word << "\n";
-  //
-  //cout << "Type in a number as a word between zero and nine: \n";
-  //string spelled_number {" "};
-  //cin >> spelled_number;
-  //int number_in_digit = convert_spelled_value_to_digit(spelled_number);
-  //cout << number_in_digit << "\n";
+  cin >> input_num_one >> input_num_two >> operation;
+  my_calculator(input_num_one, input_num_two, operation);
 }
