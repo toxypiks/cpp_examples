@@ -16,7 +16,7 @@ void count_user_money(){
   cin >> dimes;
   cout << "How many quarters you have?\n";
   cin >> quarters;
-  cout << "How many half_dollars you have?\n";
+  cout << "How many half dollars you have?\n";
   cin >> half_dollars;
   cout << "How many dollars you have?\n";
   cin >> dollars;
@@ -28,13 +28,29 @@ void count_user_money(){
   value_in_pennies += half_dollars * 50;
   value_in_pennies += dollars * 100;
 
-  cout << "You have " << pennies << " pennies\n";
-  cout << "You have " << nickels << " nickels\n";
-  cout << "You have " << dimes << " dimes\n";
-  cout << "You have " << quarters << " quarters\n";
-  cout << "You have " << half_dollars << " half_dollars\n";
-  cout << "You have " << dollars << " dollars\n";
-  cout << "The value of all your coins is " << value_in_pennies << " cents\n";
+  if(pennies == 1)
+    cout << "You have " << pennies << " penny\n";
+  else
+    cout << "You have " << pennies << " pennies\n";
+  if(nickels == 1)
+    cout << "You have " << nickels << " nickel\n";
+  else
+    cout << "You have " << nickels << " nickels\n";
+  if(dimes == 1)
+    cout << "You have " << dimes << " dime\n";
+  else
+    cout << "You have " << dimes << " dimes\n";
+  if(quarters == 1)
+     cout << "You have " << quarters << " quarter\n";
+  else
+     cout << "You have " << quarters << " quarters\n";
+  if(half_dollars == 1)
+     cout << "You have " << half_dollars << " half dollar\n";
+  else
+     cout << "You have " << half_dollars << " half dollars\n";
+  if(dollars == 1)
+     cout << "You have " << dollars << " dollars\n";
+  cout << "The value of all your coins is " << value_in_pennies/100 << " dollars\n";
 }
 
 
