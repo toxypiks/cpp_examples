@@ -1,64 +1,25 @@
 #include "std_lib_facilities.h"
 
+vector<int> check_prime_numbers(vector<int> numbers){
+  vector<int> prime_numbers;
+  for(int i = 0; i < numbers.size();i++){
+    int counter {0};
+    for(int j = 1; j <= numbers[i];j++){
+      if(numbers[i] % j == 0)
+        counter++;
+    }
+    if(counter == 2)
+      prime_numbers.push_back(numbers[i]);
+  }
+  return prime_numbers;
+}
+
 int main(){
-  cout << "Lets play paper, rock, scissors. Type in p, r or s: \n";
-  char player_input {' '};
-  cin >> player_input;
-  vector<char> computer_input;
-  computer_input.push_back('p');
-  computer_input.push_back('r');
-  computer_input.push_back('s');
-
-  srand((unsigned) time(NULL));
-  int random = rand() % 3;
-  char computer_input_rand = computer_input[random];
-
-  if(player_input == 'p'){
-
-    switch(computer_input_rand){
-      case'p':
-      cout << "You chose " << player_input << ", the computer chose " << computer_input_rand << ". Nobody wins.\n";
-      break;
-
-      case'r':
-      cout << "You chose " << player_input << ", the computer chose " << computer_input_rand << ". You win.\n";
-      break;
-
-      case's':
-      cout << "You chose " << player_input << ", the computer chose " << computer_input_rand << ". The computer wins.\n";
-      break;
-    }
+  vector<int> numbers_to_check;
+  for(int i = 1; i <= 100;i++){
+    numbers_to_check.push_back(i);
   }
-  else if(player_input == 'r'){
-    
-    switch(computer_input_rand){
-      case'p':
-      cout << "You chose " << player_input << ", the computer chose " << computer_input_rand << ". The computer wins.\n";
-      break;
-
-      case'r':
-      cout << "You chose " << player_input << ", the computer chose " << computer_input_rand << ". Nobody wins.\n";
-      break;
-
-      case's':
-      cout << "You chose " << player_input << ", the computer chose " << computer_input_rand << ". You win.\n";
-      break;
-    }
-  }
-  else if(player_input == 's'){
-
-    switch(computer_input_rand){
-      case'p':
-      cout << "You chose " << player_input << ", the computer chose " << computer_input_rand << ". You win.\n";
-      break;
-
-      case'r':
-      cout << "You chose " << player_input << ", the computer chose " << computer_input_rand << ". The computer wins.\n";
-      break;
-
-      case's':
-      cout << "You chose " << player_input << ", the computer chose " << computer_input_rand << ". Nobody wins.\n";
-      break;
-    }
-  }
+  vector<int> my_prime = check_prime_numbers(numbers_to_check);
+  for(int i = 0; i < my_prime.size();i++)
+    cout << my_prime[i] << "\n";
 }
