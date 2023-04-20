@@ -1,29 +1,26 @@
-#include "std_lib_facilities.h"
+//#include "std_lib_facilities.h"
+#include <vector>
+#include <iostream>
 
-vector<int> check_prime_numbers(int max){
-  
-  vector<int> prime_numbers;
-  vector<int> numbers_to_check;
-  
-  for(int i = 1; i <= max;i++){
-    numbers_to_check.push_back(i);
-  }
-  for(int i = 0; i < numbers_to_check.size();i++){
-    int counter {0};
-    for(int j = 1; j <= numbers_to_check[i];j++){
-      if(numbers_to_check[i] % j == 0)
-        counter++;
+using namespace std;
+
+void sieve_of_eratosthenes(int max){
+  vector<bool> prime;
+  for(int i = 0; i <= max; i++)
+    prime.push_back(true);
+
+  for(int p = 2; p * p <= max;p++){
+    if (prime[p] == true){
+      for(int j = 2; j<= max;j++)
+        prime[j*p] = false;
     }
-    if(counter == 2)
-      prime_numbers.push_back(numbers_to_check[i]);
   }
-  return prime_numbers;
+  for (int q = 2; q <=max;q++)
+    if(prime[q] == true)
+      cout << q << "\n";
 }
 
 int main(){
-
-  int max = 50;
-  vector<int> my_prime = check_prime_numbers(50);
-  for(int i = 0; i < my_prime.size();i++)
-    cout << my_prime[i] << "\n";
+  int my_int {10};
+  sieve_of_eratosthenes(my_int);
 }
