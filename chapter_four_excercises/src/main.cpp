@@ -9,9 +9,9 @@ void sieve_of_eratosthenes(int max){
   for(int i = 0; i <= max; i++)
     prime.push_back(true);
 
-  for(int p = 2; p * p <= max;p++){
+  for(int p = 2; p*p <= max;p++){
     if (prime[p] == true){
-      for(int j = 2; j<= max;j++)
+      for(int j = 2; j*p <= max;j++)
         prime[j*p] = false;
     }
   }
