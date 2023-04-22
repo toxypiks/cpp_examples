@@ -1,26 +1,39 @@
-//#include "std_lib_facilities.h"
-#include <vector>
-#include <iostream>
+#include "std_lib_facilities.h"
 
-using namespace std;
-
-void sieve_of_eratosthenes(int max){
-  vector<bool> prime;
-  for(int i = 0; i <= max; i++)
-    prime.push_back(true);
-
-  for(int p = 2; p*p <= max;p++){
-    if (prime[p] == true){
-      for(int j = 2; j*p <= max;j++)
-        prime[j*p] = false;
+int find_mode_value(vector<int> values){
+  sort(values);
+  int mode {values[0]};
+  int count {1};
+  int remember_count {1};
+  
+  for(int i = 1;i<values.size();i++){
+    if(values[i] == values[i-1])
+    {
+      count++;
+    }
+    else{
+      if(count > remember_count){
+        remember_count = count;
+        mode = values[i-1];
+        count = 1;
+      }
+      count = 1;
     }
   }
-  for (int q = 2; q <=max;q++)
-    if(prime[q] == true)
-      cout << q << "\n";
+  return mode;
 }
 
+
 int main(){
-  int my_int {10};
-  sieve_of_eratosthenes(my_int);
+  int x {0};
+  int input {0};
+  vector<int> numbers;
+  
+  while(x < 10) {
+    cin >> input;
+    numbers.push_back(input);
+    x++;
+  }
+  int result = find_mode_value(numbers);
+  cout << "result: " << result << "\n";
 }
