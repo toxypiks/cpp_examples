@@ -11,7 +11,7 @@ int find_mode_value(vector<int> values){
     {
       count++;
     }
-    else{
+    else {
       if(count > remember_count){
         remember_count = count;
         mode = values[i-1];
@@ -20,6 +20,11 @@ int find_mode_value(vector<int> values){
       count = 1;
     }
   }
+
+  if(count > remember_count){
+    remember_count = count;
+    mode = values[values.size()-1];
+}
   return mode;
 }
 
