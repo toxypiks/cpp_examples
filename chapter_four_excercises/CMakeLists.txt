@@ -6,9 +6,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(include)
 
-set(SRC_FILES
+# statistacal mode function
+# implementation with sorting
+set(MODE_WITH_SORT_SRC_FILES
   src/main.cpp)
 
-add_executable(simple_example_cpp
-  ${SRC_FILES}
+add_executable(mode_with_sort
+  ${MODE_WITH_SORT_SRC_FILES}
+  )
+
+# statistacal mode function
+# implementation with hash map -> Histogram
+set(MODE_WITH_HASH_MAP_SRC_FILES
+  src/mode_with_hash_map.cpp)
+
+add_executable(mode_with_hash_map
+  ${MODE_WITH_HASH_MAP_SRC_FILES}
   )
