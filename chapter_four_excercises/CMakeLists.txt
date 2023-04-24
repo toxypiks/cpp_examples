@@ -22,11 +22,15 @@ add_library(mode_with_hash_map SHARED
   ${MODE_WITH_HASH_MAP_SRC_FILES}
   )
 
-
 set(MODE_EXE_SRC_FILES
   src/mode.cpp)
 add_executable(mode
   ${MODE_EXE_SRC_FILES})
+
+set(QUADRATIC_EQUATION_SRC_FILES
+  src/quadratic_equation.cpp)
+add_executable(quadratic_equation
+  ${QUADRATIC_EQUATION_SRC_FILES})
 
 target_link_libraries(mode
   mode_with_sort
