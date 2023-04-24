@@ -1,5 +1,6 @@
-//#include "std_lib_facilities.h"
 #include <vector>
+#include <string>
+#include <iostream>
 #include "mode_with_sort.hpp"
 #include "mode_with_hash_map.hpp"
 
@@ -36,9 +37,9 @@ int main(){
     x++;
   }
   
-  int result = find_mode_value(numbers);
-  cout << "result_sort: " << result << "\n";
+  int result1 = find_mode_value(numbers);
+  cout << "result_sort: " << result1 << "\n";
 
-  int result = find_mode_value_with_hash_map(numbers);
-  cout << "result_hash_map: " << result << "\n";
+  int result2 = find_mode_value_with_hash_map(numbers);
+  cout << "result_hash_map: " << result2 << "\n";
 }
