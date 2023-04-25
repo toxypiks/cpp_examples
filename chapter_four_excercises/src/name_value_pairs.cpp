@@ -1,5 +1,14 @@
 #include "std_lib_facilities.h"
 
+bool does_name_exists(string name, vector<string> names){
+  for (int i = 0; i< names.size(); i++){
+      if(name == names[i]){
+        return true;
+      }
+    }
+  return false;
+}
+
 int main(){
   // save name and age in vectors while name should be unique in vector
   cout << "Type in a name and an age: \n";
@@ -10,6 +19,7 @@ int main(){
 
   bool run {true};
   bool put_in_string_vec {true};
+  bool name_exists {false};
   
   while(run){
     cin >> name >> age;
@@ -17,12 +27,9 @@ int main(){
       run = false;
       put_in_string_vec = false;
     }
-    for (int i = 0; i< names.size(); i++){
-      if(name == names[i]){
-        put_in_string_vec = false;
-      }
-    }
-    if(put_in_string_vec == false && name != "NoName" && age != 0){
+    name_exists = does_name_exists(name,names);
+
+    if(name_exists == true && name != "NoName" && age != 0){
       cout << "This name already exists\n";
       break;
     }
