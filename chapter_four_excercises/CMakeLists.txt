@@ -32,6 +32,11 @@ set(QUADRATIC_EQUATION_SRC_FILES
 add_executable(quadratic_equation
   ${QUADRATIC_EQUATION_SRC_FILES})
 
+set(NAME_VALUE_PAIRS_SRC_FILES
+  src/name_value_pairs.cpp)
+add_executable(name_value_pairs
+  ${NAME_VALUE_PAIRS_SRC_FILES})
+
 target_link_libraries(mode
   mode_with_sort
   mode_with_hash_map
