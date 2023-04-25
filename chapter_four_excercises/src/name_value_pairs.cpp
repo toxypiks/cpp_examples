@@ -20,6 +20,9 @@ int main(){
   bool run {true};
   bool put_in_string_vec {true};
   bool name_exists {false};
+  string search_name {""};
+  bool name_in_vec {false};
+
   
   while(run){
     cin >> name >> age;
@@ -41,4 +44,10 @@ int main(){
   for(int j = 0; j<names.size();j++){
     cout << names[j] << " " << ages[j] << "\n";
   }
+  
+  cout << "Which name you want to search for in list? \n";
+  cin >> search_name;
+  name_in_vec = does_name_exists(search_name,names);
+  if(name_in_vec)
+    cout << "The name " << search_name << " does exist.\n";
 }
