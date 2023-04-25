@@ -17,6 +17,15 @@ int return_age_of_name(string name,vector<string> names, vector<int> ages){
     }
   return -1;
 }
+
+vector<string> return_names_by_age(int age,vector<int> ages, vector<string> names){
+  vector<string> resulting_names;
+  for(int i = 0; i<ages.size();i++){
+    if(age == ages[i])
+      resulting_names.push_back(names[i]);
+  }
+  return resulting_names;
+}
     
 
 int main(){
@@ -32,6 +41,7 @@ int main(){
   bool name_exist {false};
   string search_name {""};
   int age_of_name {0};
+  int search_age {0};
 
   
   while(run){
@@ -55,13 +65,25 @@ int main(){
     cout << names[j] << " " << ages[j] << "\n";
   }
   
-  cout << "Which name you want to search for in list? \n";
-  cin >> search_name;
-  name_exist = does_name_exist(search_name,names);
-  if(name_exist){
-    age_of_name = return_age_of_name(search_name,names,ages);
-    cout << "The age of " << search_name << " is " << age_of_name << "\n";
+  //cout << "Which name you want to search for in list? \n";
+  //cin >> search_name;
+  //name_exist = does_name_exist(search_name,names);
+  //if(name_exist){
+  //  age_of_name = return_age_of_name(search_name,names,ages);
+  //  cout << "The age of " << search_name << " is " << age_of_name << "\n";
+  //}
+  //else
+  //  cout << "Name not found\n";
+
+  cout << "Enter age to search for corresponding names: \n";
+  cin >> search_age;
+  vector<string>result;
+  result = return_names_by_age(search_age,ages,names);
+  if(result.size()>0){
+    for(string data:result){
+      cout << data << "\n";
+    }
   }
   else
-    cout << "Name not found\n";
+    cout << "Score not found\n";
 }
