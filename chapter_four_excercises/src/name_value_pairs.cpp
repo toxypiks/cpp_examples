@@ -1,6 +1,6 @@
 #include "std_lib_facilities.h"
 
-bool does_name_exists(string name, vector<string> names){
+bool does_name_exist(string name, vector<string> names){
   for (int i = 0; i< names.size(); i++){
       if(name == names[i]){
         return true;
@@ -8,6 +8,16 @@ bool does_name_exists(string name, vector<string> names){
     }
   return false;
 }
+
+int return_age_of_name(string name,vector<string> names, vector<int> ages){
+  for (int i = 0; i< names.size(); i++){
+      if(name == names[i]){
+        return ages[i];
+      }
+    }
+  return -1;
+}
+    
 
 int main(){
   // save name and age in vectors while name should be unique in vector
@@ -19,9 +29,9 @@ int main(){
 
   bool run {true};
   bool put_in_string_vec {true};
-  bool name_exists {false};
+  bool name_exist {false};
   string search_name {""};
-  bool name_in_vec {false};
+  int age_of_name {0};
 
   
   while(run){
@@ -30,9 +40,9 @@ int main(){
       run = false;
       put_in_string_vec = false;
     }
-    name_exists = does_name_exists(name,names);
+    name_exist = does_name_exist(name,names);
 
-    if(name_exists == true && name != "NoName" && age != 0){
+    if(name_exist == true && name != "NoName" && age != 0){
       cout << "This name already exists\n";
       break;
     }
@@ -47,7 +57,11 @@ int main(){
   
   cout << "Which name you want to search for in list? \n";
   cin >> search_name;
-  name_in_vec = does_name_exists(search_name,names);
-  if(name_in_vec)
-    cout << "The name " << search_name << " does exist.\n";
+  name_exist = does_name_exist(search_name,names);
+  if(name_exist){
+    age_of_name = return_age_of_name(search_name,names,ages);
+    cout << "The age of " << search_name << " is " << age_of_name << "\n";
+  }
+  else
+    cout << "Name not found\n";
 }
