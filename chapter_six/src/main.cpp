@@ -136,18 +136,28 @@ double primary()     // read and evaluate a Primary
 
 int main()
 try {
-    while (cin)
-        cout << expression() << '\n';
-    keep_window_open("~0");
+  double val {0};
+  while (cin){
+      //cout << expression() << '\n'; version 1
+    Token t = ts.get();
+
+    if(t.kind == 'q') break; //'q' for "quit"
+    if(t.kind == ';') //';' for "Print now"
+      cout << "=" << val << "\n";
+    else
+      ts.putback(t);
+    val = expression();
+  }
+  // keep_window_open("~0");
 }
 catch (exception& e) {
     cerr << e.what() << endl;
-    keep_window_open ("~1");
+    //keep_window_open ("~1");
     return 1;
 }
 catch (...) {
     cerr << "exception \n";
-    keep_window_open ("~2");
+    //keep_window_open ("~2");
     return 2;
 }
 
