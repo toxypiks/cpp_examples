@@ -79,7 +79,7 @@ Token Token_stream::get() //2/5 compile error: toxypiks added Token_stream::
     switch (ch) {
     case '=':    // for "print"
     case 'x':    // for "quit"
-      case '(': case ')': case '{': case '}': case '+': case '-': case '*': case '/':
+      case '(': case ')': case '{': case '}': case '+': case '-': case '*': case '/': case '!':
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
@@ -132,22 +132,49 @@ double primary()
 }
 
 //------------------------------------------------------------------------------
+double my_factorial(){
+  double left = primary();
+  Token t = ts.get();
+  double factorial = {1.0};
+
+  while(true) {
+    switch(t.kind) {
+      case '!':{
+        if(left < 0) error ("Theres no Factorial of a negative number");
+        if(left == 0){
+          ts.putback(t);
+          return 1;
+        }
+        for(int i = 1; i <= left;i++){
+          factorial*= i;
+        }
+        left = factorial;
+        t = ts.get();
+        break;
+      }
+      default:
+        ts.putback(t);
+        return left;
+    }
+  }
+}
+
 
 // deal with *, /, and %
 double term()
 {
-    double left = primary();
+    double left = my_factorial();
     Token t = ts.get();        // get the next token from token stream
 
     while (true) {
         switch (t.kind) {
         case '*':
-            left *= primary();
+          left *= my_factorial();
             t = ts.get();
             break; //2/3 logic bug: toxypiks added break
         case '/':
         {
-            double d = primary();
+            double d = my_factorial();
             if (d == 0) error("divide by zero");
             left /= d;
             t = ts.get();
@@ -191,7 +218,7 @@ int main()
 try
 {
     cout << "Welcome to our simple calculator. Please enter expressions using floating-point numbers."
-         << "Valid operators are +,-,* and /. You can also use brackets. Print the result of your expression by adding = at the end. Exit the program by typing in x.\n"; 
+         << "Valid operators are +,-,*,/ and !. You can also use brackets. Print the result of your expression by adding = at the end. Exit the program by typing in x.\n"; 
     double val {0}; //5/5 compile error: toxypiks declared double val
     while (cin) {
         Token t = ts.get();
