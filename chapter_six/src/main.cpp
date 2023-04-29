@@ -81,7 +81,7 @@ Token Token_stream::get()
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
-    case '5': case '6': case '7': case '9':
+      case '5': case '6': case '7': case '8': case '9': //toxypiks added case 8
     {
         cin.putback(ch);         // put digit back into the input stream
         double val;
@@ -135,6 +135,7 @@ double term()
         case '*':
             left *= primary();
             t = ts.get();
+            break; //toxypiks added break
         case '/':
         {
             double d = primary();
@@ -165,7 +166,7 @@ double expression()
             t = ts.get();
             break;
         case '-':
-            left += term();    // evaluate Term and subtract
+            left -= term();    // evaluate Term and subtract, toxypiks changed + to -
             t = ts.get();
             break;
         default:
