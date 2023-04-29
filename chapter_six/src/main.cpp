@@ -183,6 +183,8 @@ double expression()
 int main()
 try
 {
+    cout << "Welcome to our simple calculator. Please enter expressions using floating-point numbers."
+         << "Valid operators are +,-,* and /. You can also use brackets. Print the result of your expression by adding = at the end. Exit the program by typing in x.\n"; 
     double val {0}; //5/5 compile error: toxypiks declared double val
     while (cin) {
         Token t = ts.get();
