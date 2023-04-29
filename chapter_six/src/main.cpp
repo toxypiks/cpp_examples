@@ -15,13 +15,15 @@
 
     Happy hunting!
 
+    !This is a toxypiks solution!
+
 */
 
 #include "std_lib_facilities.h"
 
 //------------------------------------------------------------------------------
 
-class Token{
+class Token{ //1/5 compile error: toxypiks added 'c' to lass 
 public:
     char kind;        // what kind of token
     double value;     // for numbers: a value 
@@ -63,7 +65,7 @@ void Token_stream::putback(Token t)
 
 //------------------------------------------------------------------------------
 
-Token Token_stream::get()
+Token Token_stream::get() //2/5 compile error: toxypiks added Token_stream::
 {
     if (full) {       // do we already have a Token ready?
         // remove token from buffer
@@ -81,7 +83,7 @@ Token Token_stream::get()
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
-      case '5': case '6': case '7': case '8': case '9': //toxypiks added case 8
+      case '5': case '6': case '7': case '8': case '9': //1/3 logic bug: toxypiks added case 8
     {
         cin.putback(ch);         // put digit back into the input stream
         double val;
@@ -112,8 +114,8 @@ double primary()
     {
         double d = expression();
         t = ts.get();
-        if (t.kind != ')') error("')' expected");
-            return d;
+        if (t.kind != ')') error("')' expected"); //3/5 compile error: toxypiks added closing " after expected
+        return d;
     }
     case '8':            // we use '8' to represent a number
         return t.value;  // return the number's value
@@ -135,7 +137,7 @@ double term()
         case '*':
             left *= primary();
             t = ts.get();
-            break; //toxypiks added break
+            break; //2/3 logic bug: toxypiks added break
         case '/':
         {
             double d = primary();
@@ -156,7 +158,7 @@ double term()
 // deal with + and -
 double expression()
 {
-  double left = term();      // read and evaluate a Term
+  double left = term();      // read and evaluate a Term 4/5 compile error: toxypiks added closing bracket
     Token t = ts.get();        // get the next token from token stream
 
     while (true) {
@@ -166,7 +168,7 @@ double expression()
             t = ts.get();
             break;
         case '-':
-            left -= term();    // evaluate Term and subtract, toxypiks changed + to -
+            left -= term();    //evaluate Term and subtract, 3/3 logic bug: toxypiks changed + to -
             t = ts.get();
             break;
         default:
@@ -181,7 +183,7 @@ double expression()
 int main()
 try
 {
-    double val {0};
+    double val {0}; //5/5 compile error: toxypiks declared double val
     while (cin) {
         Token t = ts.get();
 
