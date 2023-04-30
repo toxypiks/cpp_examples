@@ -135,7 +135,7 @@ double primary()
 double my_factorial(){
   double left = primary();
   Token t = ts.get();
-  double factorial = {1.0};
+  int factorial = {1};
 
   while(true) {
     switch(t.kind) {
