@@ -17,3 +17,8 @@ set(NAME_VALUE_PAIRS_SRC_FILES
   src/name_value_pairs.cpp)
 add_executable(name_value_pairs
   ${NAME_VALUE_PAIRS_SRC_FILES})
+
+set(ENGLISH_GRAMMAR_SRC_FILES
+  src/english_grammar.cpp)
+add_executable(english_grammar
+  ${ENGLISH_GRAMMAR_SRC_FILES})
