@@ -12,3 +12,8 @@ set(SRC_FILES
 add_executable(simple_example_cpp
   ${SRC_FILES}
   )
+
+set(NAME_VALUE_PAIRS_SRC_FILES
+  src/name_value_pairs.cpp)
+add_executable(name_value_pairs
+  ${NAME_VALUE_PAIRS_SRC_FILES})
