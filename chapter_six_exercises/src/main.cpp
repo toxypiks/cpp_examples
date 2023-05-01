@@ -126,6 +126,8 @@ double primary()
     }
     case '8':            // we use '8' to represent a number
         return t.value;  // return the number's value
+    case 'x':
+        exit(0);
     default:
         error("primary expected");
     }
@@ -135,7 +137,7 @@ double primary()
 double my_factorial(){
   double left = primary();
   Token t = ts.get();
-  int factorial = {1};
+  int factorial {1};
 
   while(true) {
     switch(t.kind) {
@@ -145,6 +147,7 @@ double my_factorial(){
           ts.putback(t);
           return 1;
         }
+        // left > 0
         for(int i = 1; i <= left;i++){
           factorial*= i;
         }
@@ -158,7 +161,6 @@ double my_factorial(){
     }
   }
 }
-
 
 // deal with *, /, and %
 double term()
@@ -223,14 +225,16 @@ try
     while (cin) {
         Token t = ts.get();
 
-        if (t.kind == 'x') break; // 'q' for quit
+        if (t.kind == 'x') {
+          break; // 'q' for quit
+        }
         if (t.kind == '=')        // ';' for "print now"
             cout << "=" << val << '\n';
         else
             ts.putback(t);
         val = expression();
     }
-    keep_window_open();
+    // keep_window_open(); // only for windows
 }
 catch (exception& e) {
     cerr << "error: " << e.what() << '\n';
