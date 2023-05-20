@@ -22,32 +22,23 @@ int main(){
   double value {0};
   char unit {' '};
   cin >> value >> unit;
-  if(unit == 'c'){
-    try
-    {
+  try
+  {
+    if(unit == 'c') {
       double k = ctok(value);
-      cout << k << "\n";
+      cout << k << '\n';
     }
-    catch (invalid_argument& e)
-    {
-      cerr << e.what() << '\n';
-      return -1;
+    else if (unit == 'k'){
+      double c = ktoc(value);
+      cout << c << '\n';
     }
-    return 0;
+    else
+      cout << "Invalid unit\n";
   }
-  else if(unit == 'k'){
-    try
-    {
-      double k = ktoc(value);
-      cout << k << "\n";
-    }
-    catch (invalid_argument& e)
-    {
-      cerr << e.what() << '\n';
-      return -1;
-    }
-    return 0;
+  catch (invalid_argument& e)
+  {
+    cerr << e.what() << '\n';
+    return -1;
   }
-  else
-    cout << "Invalid unit\n";
+  return 0;
 }
