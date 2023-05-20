@@ -19,3 +19,10 @@ set(SOLVE_QUADRATIC_EQUATION_SRC_FILES
 add_executable(solve_quadratic_equation
   ${SOLVE_QUADRATIC_EQUATION_SRC_FILES}
   )
+
+set(CALC_SUM_OF_N_VALUES_SRC_FILES
+  src/calc_sum_of_n_values.cpp)
+
+add_executable(calc_sum_of_n_values
+  ${CALC_SUM_OF_N_VALUES_SRC_FILES}
+  )
