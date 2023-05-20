@@ -12,3 +12,10 @@ set(SRC_FILES
 add_executable(simple_example_cpp
   ${SRC_FILES}
   )
+
+set(SOLVE_QUADRATIC_EQUATION_SRC_FILES
+  src/solve_quadratic_equation.cpp)
+
+add_executable(solve_quadratic_equation
+  ${SOLVE_QUADRATIC_EQUATION_SRC_FILES}
+  )
