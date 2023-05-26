@@ -26,3 +26,10 @@ set(CALC_SUM_OF_N_VALUES_SRC_FILES
 add_executable(calc_sum_of_n_values
   ${CALC_SUM_OF_N_VALUES_SRC_FILES}
   )
+
+set(HIGHEST_FIBONACCI_SRC_FILES 
+  src/highest_fibonacci.cpp)    
+                                   
+add_executable(highest_fibonacci
+  ${HIGHEST_FIBONACCI_SRC_FILES}
+  )                                
