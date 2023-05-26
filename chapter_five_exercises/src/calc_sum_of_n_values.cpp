@@ -7,12 +7,14 @@ int calc_sum_of_n_values(int n, vector<int> values) {
   else if(n <= 0)
     throw invalid_argument("n cant be negative or zero");
   else if(values.size() == 0)
-    throw invalid_argument("no values given");
+    throw ("no values given");
   else {
     int sum {0};
     for(int i = 0; i < n; i++) {
       sum = sum + values[i];
     }
+    if(isdigit(sum) != 0)
+      throw invalid_argument("Output cant be represented as integer");
     return sum;
   }
 }
