@@ -1,4 +1,5 @@
 #include "std_lib_facilities.h"
+#include <string>
 
 int calc_sum_of_n_values(int n, vector<int> values) {
   if(n > values.size())
@@ -16,23 +17,35 @@ int calc_sum_of_n_values(int n, vector<int> values) {
   }
 }
 
+string format_output(int n, vector<int> values) {
+  string output {""};
+  for(int i = 0; i < n; i++){
+    output += std::to_string(values[i]) + " ";
+  }
+  return output;
+}
+
 
 int main(){
   try {
+    
     int num_values {0};
     cout << "Please enter the number of values you want to sum: \n";
     cin >> num_values;
-    if (cin.fail())
+    if(cin.fail())
       throw invalid_argument("Only integer allowed as input");
     else if(num_values < 1)
       throw invalid_argument("Number of summed up values cant be zero");
+    
     vector<int> values;
     int value;
     cout << "Please enter some integers (press '|' to stop): \n";
     while(cin>>value)
       values.push_back(value);
     int result = calc_sum_of_n_values(num_values,values);
-    cout << "The sum of the first " << num_values << " numbers (" << values[0] << ", " << values[1] << ", " << values[2] << ")" << " is " << result << ".\n";
+    string output_values = format_output(num_values,values);
+    
+    cout << "The sum of the first " << num_values << " numbers (" << output_values << ")" << " is " << result << ".\n";
     return 0;
   }
   catch (invalid_argument& e)
