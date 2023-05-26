@@ -18,10 +18,14 @@ int calc_sum_of_n_values(int n, vector<int> values) {
 
 
 int main(){
-  int num_values {0};
-  cout << "Please enter the number of values you want to sum: \n";
-  cin >> num_values;
   try {
+    int num_values {0};
+    cout << "Please enter the number of values you want to sum: \n";
+    cin >> num_values;
+    if (cin.fail())
+      throw invalid_argument("Only integer allowed as input");
+    else if(num_values < 1)
+      throw invalid_argument("Number of summed up values cant be zero");
     vector<int> values;
     int value;
     cout << "Please enter some integers (press '|' to stop): \n";
@@ -35,5 +39,8 @@ int main(){
   {
     cerr << e.what() << '\n';
     return -1;
+  }
+  catch(...) {
+    cerr << "Unknown exception!\n";
   }
 }
