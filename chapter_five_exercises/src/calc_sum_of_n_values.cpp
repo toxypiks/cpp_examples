@@ -1,7 +1,7 @@
 #include "std_lib_facilities.h"
 #include <string>
 
-int calc_sum_of_n_values(int n, vector<int> values) {
+double calc_sum_of_n_values(double n, vector<double> values) {
   if(n > values.size())
     throw invalid_argument("n higher then given numbers of values");
   else if(n <= 0)
@@ -9,7 +9,7 @@ int calc_sum_of_n_values(int n, vector<int> values) {
   else if(values.size() == 0)
     throw ("no values given");
   else {
-    int sum {0};
+    double sum {0};
     for(int i = 0; i < n; i++) {
       sum = sum + values[i];
     }
@@ -19,7 +19,7 @@ int calc_sum_of_n_values(int n, vector<int> values) {
   }
 }
 
-string format_output(int n, vector<int> values) {
+string format_output(int n, vector<double> values) {
   string output {""};
   for(int i = 0; i < n; i++){
     output += std::to_string(values[i]) + " ";
@@ -31,7 +31,7 @@ string format_output(int n, vector<int> values) {
 int main(){
   try {
     
-    int num_values {0};
+    double num_values {0.0};
     cout << "Please enter the number of values you want to sum: \n";
     cin >> num_values;
     if(cin.fail())
@@ -39,12 +39,12 @@ int main(){
     else if(num_values < 1)
       throw invalid_argument("Number of summed up values cant be zero");
     
-    vector<int> values;
-    int value;
+    vector<double> values;
+    double value;
     cout << "Please enter some integers (press '|' to stop): \n";
     while(cin>>value)
       values.push_back(value);
-    int result = calc_sum_of_n_values(num_values,values);
+    double result = calc_sum_of_n_values(num_values,values);
     string output_values = format_output(num_values,values);
     
     cout << "The sum of the first " << num_values << " numbers (" << output_values << ")" << " is " << result << ".\n";
