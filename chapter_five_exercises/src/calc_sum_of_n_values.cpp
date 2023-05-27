@@ -1,5 +1,6 @@
 #include "std_lib_facilities.h"
 #include <string>
+#include <climits>
 
 double calc_sum_of_n_values(double n, vector<double> values) {
   if(n > values.size())
@@ -13,8 +14,8 @@ double calc_sum_of_n_values(double n, vector<double> values) {
     for(int i = 0; i < n; i++) {
       sum = sum + values[i];
     }
-    if(isdigit(sum) != 0)
-      throw invalid_argument("Output cant be represented as integer");
+    if(sum > INT_MAX && sum < INT_MIN)
+      throw invalid_argument("Output can't be represented as integer");
     return sum;
   }
 }
