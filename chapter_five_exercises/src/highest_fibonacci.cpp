@@ -3,14 +3,15 @@
 
 void highest_fibonacci() {
   int y {0};
+  int x {1};
   int steps {0};
-  while(y < INT_MAX) {
-    int x {1};
-    x = x + y;
-    y = x + y;
-    steps += 1;
+  while(x < INT_MAX - y ) {
+    int temp = x;
+	x = temp + y;
+	y = temp;
+	steps +=1;
   }
-  cout << "The highest fibonacci number is: " << y << " and its the " << steps << "th number.\n";
+  cout << "The highest fibonacci number is: " << x << " " << y << " and its the " << steps << "th number.\n";
 }
 
 int main () {
