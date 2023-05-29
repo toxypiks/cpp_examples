@@ -65,28 +65,30 @@ void format_output(vector<Guesses> guesses) {
 
 int main() {
   try {
-    cout << "Lets play a guessing game. Guess four unique numbers between 1 - 10 and see if they are correct (right number & right place = bull, right number wrong place = cow): \n";
-    bool won = false;
-    vector<int> rand_test = four_random_number_gen();
-    while(!won) {
-      int input {0};
-      vector <int> user_inputs {};
-      for (int i = 0; i < 4; i++) {
-		if(cin >> input) {
-    	  if (input <= 9 && input >= 0)
-    	    if (std::find(user_inputs.begin(), user_inputs.end(), input) == user_inputs.end())
-    	      user_inputs.push_back(input);
-    	    else throw invalid_argument("Only 4 unique integers are allowed, you already typed that number");
-    	  else throw invalid_argument("Only integers between 0 and 9 are allowed");
-		}
-    	else throw invalid_argument("only integers as input are allowed");
+	while(true) {
+      cout << "Lets play a guessing game. Guess four unique numbers between 1 - 10 and see if they are correct (right number & right place = bull, right number wrong place = cow): \n";
+      bool won = false;
+      vector<int> rand_test = four_random_number_gen();
+      while(!won) {
+        int input {0};
+        vector <int> user_inputs {};
+        for (int i = 0; i < 4; i++) {
+	  	if(cin >> input) {
+      	  if (input <= 9 && input >= 0)
+      	    if (std::find(user_inputs.begin(), user_inputs.end(), input) == user_inputs.end())
+      	      user_inputs.push_back(input);
+      	    else throw invalid_argument("Only 4 unique integers are allowed, you already typed that number");
+      	  else throw invalid_argument("Only integers between 0 and 9 are allowed");
+	  	}
+      	else throw invalid_argument("only integers as input are allowed");
+        }
+        cout << std::endl;
+        vector<Guesses> my_guesses = compare_guess_with_actual(rand_test, user_inputs);
+      	
+        format_output(my_guesses);
+        won = check_won(my_guesses);
       }
-      cout << std::endl;
-      vector<Guesses> my_guesses = compare_guess_with_actual(rand_test, user_inputs);
-    	
-      format_output(my_guesses);
-      won = check_won(my_guesses);
-    }
+	}
   }
   catch (invalid_argument& e)
   {
