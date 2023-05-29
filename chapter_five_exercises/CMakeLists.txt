@@ -32,4 +32,11 @@ set(HIGHEST_FIBONACCI_SRC_FILES
                                    
 add_executable(highest_fibonacci
   ${HIGHEST_FIBONACCI_SRC_FILES}
+  )
+
+set(BULLS_AND_COWS_SRC_FILES 
+  src/bulls_and_cows.cpp)    
+                                   
+add_executable(bulls_and_cows
+  ${BULLS_AND_COWS_SRC_FILES}
   )                                
