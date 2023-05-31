@@ -5,7 +5,7 @@ int main() {
   try {
     cout << "Please type each day of the week with a value seperated by a whitespace\n";
     string weekday {""};
-    double value {0};
+    string value {0};
 
     vector<string> weekdays = {"Monday", "monday", "Mon", "mon", "M", "m", "Tuesday", "tuesday", "Tue", "tue", "Tu", "tu", "Wednesday", "wednesday", "Wed", "wed", "W", "w", "Thursday", "thursday", "Thu", "thu", "Th", "th","Friday", "friday", "Fri", "fri", "F", "f", "Saturday", "saturday", "Sat", "sat", "S", "s", "Sunday", "sunday", "Sun", "sun", "U", "u"};
 
@@ -19,11 +19,7 @@ int main() {
       if(std::find(weekdays.begin(), weekdays.end(),weekday) != weekdays.end()) {
           if(std::find(user_input_weekdays.begin(), user_input_weekdays.end(),weekday) == user_input_weekdays.end()) {
             user_input_weekdays.push_back(weekday);
-            if(cin.fail()) {
-              throw invalid_argument("Only integer are allowed as second input");
-            }
-            else
-              user_input_values.push_back(value);
+            user_input_values.push_back(stoi(value));
           }
           else
             throw invalid_argument("You already typed in this weekday");
@@ -35,7 +31,7 @@ int main() {
     }
     
     int sum_of_the_week {0};
-    for(double input: user_input_values)
+    for(int input: user_input_values)
       sum_of_the_week += input;
     cout << "Sum of the week is: " << sum_of_the_week << '\n';
   }
