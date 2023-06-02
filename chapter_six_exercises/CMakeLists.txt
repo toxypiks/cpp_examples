@@ -22,3 +22,8 @@ set(ENGLISH_GRAMMAR_SRC_FILES
   src/english_grammar.cpp)
 add_executable(english_grammar
   ${ENGLISH_GRAMMAR_SRC_FILES})
+
+set(PERMUTATION_COMBINATION_SRC_FILES
+  src/permutation_combination.cpp)
+add_executable(permutation_combination
+  ${PERMUTATION_COMBINATION_SRC_FILES})
