@@ -63,8 +63,8 @@ std::tuple<int, int, calculation> read_input() {
   return {number1, number2, calculation::p}; 
 }
 
-int factorial(int number) {
-  int result {1};
+double factorial(int number) {
+  double result {1};
   if(number == 0)
 	return 1;
   else {
@@ -75,14 +75,29 @@ int factorial(int number) {
   return result;
 }
 
+double permutation(int set, int subset) {
+  double result = factorial(set)/(factorial(set-subset));
+  return result;
+}
+
+double composition(int set, int subset) {
+  double result = permutation(set, subset)/(factorial(subset));
+  return result;
+}
+
 int main() {
-  //try {
-  //  std::tuple<int, int, calculation> p_c_values = read_input();
-  //}
-  //catch (std::invalid_argument& e) {
-  //  cerr << e.what() << endl;
-  //	exit(-1);
-  //}
-  int fact = factorial(10);
-  cout << fact << '\n';
+  try {
+    std::tuple<int, int, calculation> p_c_values = read_input();
+	int num1 = get<0>(p_c_values);
+    int num2 = get<1>(p_c_values);
+    calculation calc = get<2>(p_c_values);
+    if(calc == calculation::p) {
+	double result_p = permutation(num1, num2);
+	cout << "Permutation of " << num1 << " and " << num2 << " results in " << result_p << '\n';
+	}
+  }
+  catch (std::invalid_argument& e) {
+    cerr << e.what() << endl;
+  	exit(-1);
+  }
 }
