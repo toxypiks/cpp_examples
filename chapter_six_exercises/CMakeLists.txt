@@ -27,3 +27,8 @@ set(PERMUTATION_COMBINATION_SRC_FILES
   src/permutation_combination.cpp)
 add_executable(permutation_combination
   ${PERMUTATION_COMBINATION_SRC_FILES})
+
+set(READ_NUMBERS_SRC_FILES
+  src/read_numbers.cpp)
+add_executable(read_numbers
+  ${READ_NUMBERS_SRC_FILES})
