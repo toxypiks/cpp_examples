@@ -92,12 +92,20 @@ int main() {
     int num2 = get<1>(p_c_values);
     calculation calc = get<2>(p_c_values);
     if(calc == calculation::p) {
-	double result_p = permutation(num1, num2);
-	cout << "Permutation of " << num1 << " and " << num2 << " results in " << result_p << '\n';
+	  double result_p = permutation(num1, num2);
+	  cout << "Permutation of " << num1 << " and " << num2 << " results in " << result_p << '\n';
+	}
+	else if(calc == calculation::c) {
+	  double result_c = composition(num1, num2);
+	  cout << "Composition of " << num1 << " and " << num2 << " results in " << result_c << '\n';
 	}
   }
   catch (std::invalid_argument& e) {
     cerr << e.what() << endl;
   	exit(-1);
+  }
+  catch (...) {
+    cerr << "unknown Exception" << endl;
+	exit(-1);
   }
 }
