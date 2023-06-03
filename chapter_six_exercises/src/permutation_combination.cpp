@@ -63,12 +63,26 @@ std::tuple<int, int, calculation> read_input() {
   return {number1, number2, calculation::p}; 
 }
 
+int factorial(int number) {
+  int result {1};
+  if(number == 0)
+	return 1;
+  else {
+	for (int i = 1; i <= number; i++) {
+	  result *= i;
+	}
+  }
+  return result;
+}
+
 int main() {
-  try {
-    std::tuple<int, int, calculation> p_c_values = read_input();
-  }
-  catch (std::invalid_argument& e) {
-    cerr << e.what() << endl;
-	exit(-1);
-  }
+  //try {
+  //  std::tuple<int, int, calculation> p_c_values = read_input();
+  //}
+  //catch (std::invalid_argument& e) {
+  //  cerr << e.what() << endl;
+  //	exit(-1);
+  //}
+  int fact = factorial(10);
+  cout << fact << '\n';
 }
