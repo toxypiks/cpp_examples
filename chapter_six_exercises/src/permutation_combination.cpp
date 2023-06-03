@@ -8,64 +8,64 @@ enum calculation{
   c = 1,
 };
 
-std::tuple<int, int, calculation>  einlesen() {
-  string zahl1_string{""};
-  string zahl2_string{""};
-  string c_oder_p_string{""};
+std::tuple<int, int, calculation> read_input() {
+  string number1_string{""};
+  string number2_string{""};
+  string c_or_p_string{""};
 
-  int zahl1{0};
-  int zahl2{0};
+  int number1{0};
+  int number2{0};
   
-  cin >> zahl1_string;
-  cin >> zahl2_string;
-  cin >> c_oder_p_string;
+  cin >> number1_string;
+  cin >> number2_string;
+  cin >> c_or_p_string;
   try {
-    zahl1 = stoi(zahl1_string);
+    number1 = stoi(number1_string);
   }
   catch (std::invalid_argument& e) {
-	cerr << "keine Integer zahl! (" << e.what() << ")" << endl;
+	cerr << "only integers are allowed as first and second input (" << e.what() << ")" << endl;
 	exit(-1);
   }
   catch (std::out_of_range& e) {
-	cerr << "out of range! (" << e.what() << ")" << endl;
+	cerr << "out of range (" << e.what() << ")" << endl;
 	exit(-1);
   }
   catch (...) {
-    cerr << "Unknown Exception!!!" << endl;
+    cerr << "unknown Exception" << endl;
 	exit(-1);
   }
   
   try {
-    zahl2 = stoi(zahl2_string);
+    number2 = stoi(number2_string);
   }
   catch (std::invalid_argument& e) {
-	cerr << "keine Integer zahl! (" << e.what() << ")" << endl;
+	cerr << "only integers are allowed as first and second input (" << e.what() << ")" << endl;
 	exit(-1);
   }
   catch (std::out_of_range& e) {
-	cerr << "out of range! (" << e.what() << ")" << endl;
+	cerr << "out of range (" << e.what() << ")" << endl;
 	exit(-1);
   }
   catch (...) {
-    cerr << "Unknown Exception!!!" << endl;
+    cerr << "unknown Exception" << endl;
 	exit(-1);
   }
-  if (zahl1 < zahl2){
-	throw invalid_argument("first number needs higher than second");
+  if (number1 < number2){
+	throw invalid_argument("first number needs to be higher than second");
   }
 
-  if ((c_oder_p_string != "c") && (c_oder_p_string != "p")) {
-	throw invalid_argument("input only c or p");  
+  if ((c_or_p_string != "c") && (c_or_p_string != "p")) {
+	throw invalid_argument("input can only be c or p for third argument");  
   }
-  if (c_oder_p_string == "c") {
-	  return {zahl1, zahl2, calculation::c};
+  if (c_or_p_string == "c") {
+	  return {number1, number2, calculation::c};
   }
-  return {zahl1, zahl2, calculation::p}; 
+  return {number1, number2, calculation::p}; 
 }
 
 int main() {
   try {
-    std::tuple<int, int, calculation> p_c_values = einlesen();
+    std::tuple<int, int, calculation> p_c_values = read_input();
   }
   catch (std::invalid_argument& e) {
     cerr << e.what() << endl;
