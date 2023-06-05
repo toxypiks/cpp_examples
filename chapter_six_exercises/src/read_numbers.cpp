@@ -39,7 +39,19 @@ void print_out(vector<int> numbers) {
 }
 
 int main() {
-  cout << "Please type a number between 1 and 9999: \n";
-  vector<int> user_input = read_numbers_from_input();
-  print_out(user_input);
+  try {
+	cout << "Please type a number between 1 and 9999: \n";
+	vector<int> user_input = read_numbers_from_input();
+	print_out(user_input);
+	return 0;
+  }
+  catch (invalid_argument& e) {
+	cerr << e.what() << '\n';
+	return -1;
+  }
+  catch (...) {
+	cerr << "Unknown Exception" << '\n';
+	return -1;
+  }
+  
 }
