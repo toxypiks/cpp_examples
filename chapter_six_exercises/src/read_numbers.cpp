@@ -22,10 +22,24 @@ vector<int> read_numbers_from_input() {
   return int_numbers;
 }
 
+void print_out(vector<int> numbers) {
+  if(numbers.size() == 4) {
+	cout << numbers[0] << numbers[1] << numbers[2] << numbers[3] << " is " << numbers[0] << " thousand and " << numbers[1] << " hundred and " << numbers[2] << " tens and " << numbers[3] << " ones.\n";
+  }
+  else if (numbers.size() == 3) {
+	cout << numbers[0] << numbers[1] << numbers [2] << " is " << numbers[0] << " hundred and " << numbers[1] << " tens and " << numbers[2] << " ones.\n";
+  }
+  else if (numbers.size() == 2) {
+	cout << numbers[0] << numbers[1] << " is " << numbers[0] << " tens and " << numbers[1] << " ones.\n";
+  }
+
+  else if (numbers.size() == 1) {
+	cout << numbers[0] << " is " << numbers[0] << " ones\n";
+  }
+}
+
 int main() {
   cout << "Please type a number between 1 and 9999: \n";
   vector<int> user_input = read_numbers_from_input();
-  for (int i = 0; i < user_input.size(); i++)
-	cout << user_input[i] << '\n';
-  
+  print_out(user_input);
 }
