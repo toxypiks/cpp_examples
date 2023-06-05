@@ -1,29 +1,8 @@
-
-//
-// This is example code from Chapter 6.7 "Trying the second version" of
-// "Software - Principles and Practice using C++" by Bjarne Stroustrup
-//
-
-/*
-    This file is known as calculator02buggy.cpp
-
-    I have inserted 5 errors that should cause this not to compile
-    I have inserted 3 logic errors that should cause the program to give wrong results
-
-    First try to find an remove the bugs without looking in the book.
-    If that gets tedious, compare the code to that in the book (or posted source code)
-
-    Happy hunting!
-
-    !This is a toxypiks solution!
-
-*/
-
 #include "std_lib_facilities.h"
 
 //------------------------------------------------------------------------------
 
-class Token{ //1/5 compile error: toxypiks added 'c' to lass 
+class Token{  
 public:
     char kind;        // what kind of token
     double value;     // for numbers: a value 
@@ -65,7 +44,7 @@ void Token_stream::putback(Token t)
 
 //------------------------------------------------------------------------------
 
-Token Token_stream::get() //2/5 compile error: toxypiks added Token_stream::
+Token Token_stream::get()
 {
     if (full) {       // do we already have a Token ready?
         // remove token from buffer
@@ -77,13 +56,13 @@ Token Token_stream::get() //2/5 compile error: toxypiks added Token_stream::
     cin >> ch;    // note that >> skips whitespace (space, newline, tab, etc.)
 
     switch (ch) {
-    case '=':    // for "print"
-    case 'x':    // for "quit"
-    case '(': case ')': case '+': case '-': case '*': case '/':
+    case ';':    // for "print"
+    case 'q':    // for "quit"
+      case '(': case ')': case '{': case '}': case '+': case '-': case '*': case '/': case '!':
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
-      case '5': case '6': case '7': case '8': case '9': //1/3 logic bug: toxypiks added case 8
+      case '5': case '6': case '7': case '8': case '9': 
     {
         cin.putback(ch);         // put digit back into the input stream
         double val;
@@ -114,33 +93,69 @@ double primary()
     {
         double d = expression();
         t = ts.get();
-        if (t.kind != ')') error("')' expected"); //3/5 compile error: toxypiks added closing " after expected
+        if (t.kind != ')') error("')' expected"); 
+        return d;
+    }
+      case '{':    // handle '{' expression '}'
+    {
+        double d = expression();
+        t = ts.get();
+        if (t.kind != '}') error("'}' expected"); 
         return d;
     }
     case '8':            // we use '8' to represent a number
         return t.value;  // return the number's value
+    case 'q':
+        exit(0);
     default:
         error("primary expected");
     }
 }
 
 //------------------------------------------------------------------------------
+double my_factorial(){
+  double left = primary();
+  Token t = ts.get();
+  int factorial {1};
+
+  while(true) {
+    switch(t.kind) {
+      case '!':{
+        if(left < 0) error ("Theres no Factorial of a negative number");
+        if(left == 0){
+          ts.putback(t);
+          return 1;
+        }
+        // left > 0
+        for(int i = 1; i <= left;i++){
+          factorial*= i;
+        }
+        left = factorial;
+        t = ts.get();
+        break;
+      }
+      default:
+        ts.putback(t);
+        return left;
+    }
+  }
+}
 
 // deal with *, /, and %
 double term()
 {
-    double left = primary();
+    double left = my_factorial();
     Token t = ts.get();        // get the next token from token stream
 
     while (true) {
         switch (t.kind) {
         case '*':
-            left *= primary();
+          left *= my_factorial();
             t = ts.get();
-            break; //2/3 logic bug: toxypiks added break
+            break; 
         case '/':
         {
-            double d = primary();
+            double d = my_factorial();
             if (d == 0) error("divide by zero");
             left /= d;
             t = ts.get();
@@ -158,7 +173,7 @@ double term()
 // deal with + and -
 double expression()
 {
-  double left = term();      // read and evaluate a Term 4/5 compile error: toxypiks added closing bracket
+  double left = term();      
     Token t = ts.get();        // get the next token from token stream
 
     while (true) {
@@ -168,7 +183,7 @@ double expression()
             t = ts.get();
             break;
         case '-':
-            left -= term();    //evaluate Term and subtract, 3/3 logic bug: toxypiks changed + to -
+            left -= term();    
             t = ts.get();
             break;
         default:
@@ -184,29 +199,31 @@ int main()
 try
 {
     cout << "Welcome to our simple calculator. Please enter expressions using floating-point numbers."
-         << "Valid operators are +,-,* and /. You can also use brackets. Print the result of your expression by adding = at the end. Exit the program by typing in x.\n"; 
-    double val {0}; //5/5 compile error: toxypiks declared double val
+         << "Valid operators are +,-,*,/ and !. You can also use brackets. Print the result of your expression by adding ; at the end. Exit the program by typing in q.\n"; 
+    double val {0}; 
     while (cin) {
 	  cout << "> ";
-        Token t = ts.get();
-
-        if (t.kind == 'x') break; // 'q' for quit
-        if (t.kind == '=')        // ';' for "print now"
-            cout << "=" << val << '\n';
-        else
-            ts.putback(t);
-        val = expression();
+	  Token t = ts.get();
+	  while (t.kind == ';')
+		t = ts.get(); //eat ';'
+	  if(t.kind == 'q') {
+		keep_window_open();
+		return 0;
+	  }
+	  ts.putback(t);
+      cout << "=" << expression() << '\n';
     }
-    keep_window_open();
+	keep_window_open();
+	return 0;
 }
 catch (exception& e) {
     cerr << "error: " << e.what() << '\n';
-    keep_window_open();
+    keep_window_open("~~");
     return 1;
 }
 catch (...) {
     cerr << "Oops: unknown exception!\n";
-    keep_window_open();
+    keep_window_open("~~");
     return 2;
 }
 
