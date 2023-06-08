@@ -58,7 +58,7 @@ Token Token_stream::get()
     switch (ch) {
     case ';':    // for "print"
     case 'q':    // for "quit"
-      case '(': case ')': case '{': case '}': case '+': case '-': case '*': case '/': case '!':
+	case '(': case ')': case '{': case '}': case '+': case '-': case '*': case '/': case '!': 
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
@@ -104,7 +104,11 @@ double primary()
         return d;
     }
     case '8':            // we use '8' to represent a number
-        return t.value;  // return the number's value
+	  return t.value;  // return the number's value
+	case '-':
+	  return - primary();
+	case '+':
+	  return primary();
     case 'q':
         exit(0);
     default:
@@ -211,7 +215,7 @@ try
 		return 0;
 	  }
 	  ts.putback(t);
-      cout << "=" << expression() << '\n';
+      cout << "= " << expression() << '\n';
     }
 	keep_window_open();
 	return 0;
